@@ -1,0 +1,52 @@
+
+Testing Vulnerable-Flask-App ...
+
+ ✗ [Medium] Binding to all network interfaces may open service to unintended traffic 
+   Path: vulnerable-flask-app.py, line 100 
+   Info: Using bind in bind makes it listen on all network interfaces, which may open the service to unintended traffic.
+
+ ✗ [High] Regular Expression Denial of Service (ReDoS) 
+   Path: vulnerable-flask-app.py, line 203 
+   Info: Unsanitized user input from a web form flows into re.search, where it is used to build a regular expression. This may result in a Regular expression Denial of Service attack (reDOS).
+
+ ✗ [High] Path Traversal 
+   Path: vulnerable-flask-app.py, line 85 
+   Info: Unsanitized input from an HTTP parameter flows into open, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.
+
+ ✗ [High] Path Traversal 
+   Path: vulnerable-flask-app.py, line 137 
+   Info: Unsanitized input from an HTTP parameter flows into open, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to write arbitrary files.
+
+ ✗ [High] Improper Neutralization of Directives in Statically Saved Code 
+   Path: vulnerable-flask-app.py, line 53 
+   Info: Unsanitized input from an HTTP parameter flows into flask.render_template_string, where it is used to construct a template that gets rendered. This may result in a Server-Side Template Injection vulnerability.
+
+ ✗ [High] Cross-site Scripting (XSS) 
+   Path: vulnerable-flask-app.py, line 39 
+   Info: Unsanitized input from an HTTP parameter flows into the return value of welcome2, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).
+
+ ✗ [High] Cross-site Scripting (XSS) 
+   Path: vulnerable-flask-app.py, line 67 
+   Info: Unsanitized input from an HTTP parameter flows into the return value of get_users, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).
+
+ ✗ [High] Cross-site Scripting (XSS) 
+   Path: vulnerable-flask-app.py, line 128 
+   Info: Unsanitized input from an HTTP parameter flows into the return value of run_file, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).
+
+ ✗ [High] Command Injection 
+   Path: vulnerable-flask-app.py, line 127 
+   Info: Unsanitized input from an HTTP parameter flows into subprocess.check_output, where it is used as a shell command. This may result in a Command Injection vulnerability.
+
+
+✔ Test completed
+
+Organization:      harpresing
+Test type:         Static code analysis
+Project path:      Vulnerable-Flask-App
+
+Summary:
+
+  9 Code issues found
+  8 [High]   1 [Medium] 
+
+
