@@ -3,6 +3,8 @@ import subprocess
 from werkzeug.datastructures import Headers
 from werkzeug.utils import secure_filename
 import sqlite3
+import pydig
+import json
 
 
 app = Flask(__name__)
@@ -54,9 +56,15 @@ def hello_ssti():
 def get_users():
     try:
         hostname = request.args.get('hostname')
-        command = "dig " + hostname
-        data = subprocess.check_output(command, shell=True)
-        return data
+        ip = pydig.query(hostname, 'A')
+        cname = pydig.query(hostname, 'CNAME')
+        ns = pydig.query(hostname, 'NS')
+        resp = {
+            "ip": ip,
+            "cname": cname,
+            "ns": ns
+        }
+        return json.dumps(resp)
     except:
         data = str(hostname) + " username didn't found"
         return data
