@@ -19,7 +19,7 @@ def main_page():
 def search_user(name):
     con = sqlite3.connect("test.db")
     cur = con.cursor()
-    cur.execute("select * from test where username = '%s'" % name)
+    cur.execute("select * from test where username = %(username)s", {'username': name})
     data = str(cur.fetchall())
     con.close()
     import logging
