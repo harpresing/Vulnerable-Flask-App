@@ -1,0 +1,68 @@
+Test results:
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   Location: Vulnerable-Flask-App/vulnerable-flask-app.py:2:0
+   More Info: https://bandit.readthedocs.io/en/1.7.4/blacklists/blacklist_imports.html#b404-import-subprocess
+1	from flask import Flask,jsonify,render_template_string,request,Response,render_template
+2	import subprocess
+3	from werkzeug.datastructures import Headers
+
+--------------------------------------------------
+>> Issue: [B602:subprocess_popen_with_shell_equals_true] subprocess call with shell=True identified, security issue.
+   Severity: High   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   Location: Vulnerable-Flask-App/vulnerable-flask-app.py:76:13
+   More Info: https://bandit.readthedocs.io/en/1.7.4/plugins/b602_subprocess_popen_with_shell_equals_true.html
+75	        command="cat restapi.log"
+76	        data=subprocess.check_output(command,shell=True)
+77	        return data
+
+--------------------------------------------------
+>> Issue: [B403:blacklist] Consider possible security implications associated with pickle module.
+   Severity: Low   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   Location: Vulnerable-Flask-App/vulnerable-flask-app.py:96:8
+   More Info: https://bandit.readthedocs.io/en/1.7.4/blacklists/blacklist_imports.html#b403-import-pickle
+95	    try:
+96	        import socket, pickle
+97	        HOST = "localhost"
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   Location: Vulnerable-Flask-App/vulnerable-flask-app.py:105:21
+   More Info: https://bandit.readthedocs.io/en/1.7.4/blacklists/blacklist_calls.html#b301-pickle
+104	                received_data = connection.recv(1024)
+105	                data=pickle.loads(received_data)
+106	                return str(data)
+
+--------------------------------------------------
+>> Issue: [B602:subprocess_popen_with_shell_equals_true] subprocess call with shell=True identified, security issue.
+   Severity: High   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   Location: Vulnerable-Flask-App/vulnerable-flask-app.py:127:13
+   More Info: https://bandit.readthedocs.io/en/1.7.4/plugins/b602_subprocess_popen_with_shell_equals_true.html
+126	        command="/bin/bash "+filename
+127	        data=subprocess.check_output(command,shell=True)
+128	        return data
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 199
+	Total lines skipped (#nosec): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 2
+		Medium: 1
+		High: 2
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 5
+Files skipped (0):

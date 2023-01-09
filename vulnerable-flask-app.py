@@ -94,7 +94,7 @@ def read_file():
 def deserialization():
     try:
         import socket, pickle
-        HOST = "0.0.0.0"
+        HOST = "localhost"
         PORT = 8001
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((HOST, PORT))
@@ -233,4 +233,4 @@ def uploadfile():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=8081)
+    app.run(host="localhost",port=8081)
